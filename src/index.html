@@ -3,7 +3,9 @@
 
 <head>
   <meta charset="utf-8" />
-  <title>Ionic App</title>
+  <title>TCC</title>
+
+  <script async src="assets/lib/opencv.js" onload="onOpenCvReady();" type="text/javascript"></script>
 
   <base href="/" />
 
@@ -12,7 +14,7 @@
   <meta name="format-detection" content="telephone=no" />
   <meta name="msapplication-tap-highlight" content="no" />
 
-  <link rel="icon" type="image/png" href="assets/icon/favicon.png" />
+  <link rel="icon" type="image/png" href="assets/icon/favicon.svg" />
 
   <!-- add to homescreen for ios -->
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -21,6 +23,14 @@
 
 <body>
   <app-root></app-root>
+
+  <!-- <script src="assets/lib/binaryMask.js" onload="setup();" type="text/javascript"></script> -->
+  <script type="text/javascript">
+    function onOpenCvReady() {
+      console.log('OpenCV Ready');
+    }
+  </script>
+
 </body>
 
 </html>

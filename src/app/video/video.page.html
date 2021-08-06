@@ -1,0 +1,68 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Vídeo</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div>
+
+    <br><br><input id="videoInputButton" type="file" accept="video/*"><br><br><br>
+    <button id="sampleVideoButton" (click)="loadSampleVideo()">Load Sample Video</button><br><br><br><br>
+
+    <button id="analyzeButton" (click)="processVideo()">ANALYZE</button><br><br>
+    <button id="playPause" (click)="playPause()" disabled>Play</button><br><br>
+
+    <b>Path color</b><br>
+    <button id="redButton" (click)="pathColorChange('red')">Red</button>
+    <button id="greenButton" (click)="pathColorChange('green')" disabled>Green</button>
+    <button id="blueButton" (click)="pathColorChange('blue')">Blue</button><br><br>
+
+    <span>Velocity: </span>
+    <b id="velocity">{{v}} </b>
+    <span>m/s</span><br>
+
+    <span>Acceleration: </span>
+    <b id="acceleration">{{a}} </b>
+    <span>m/s²</span><br>
+
+    <span>Horizontal Displacement: </span>
+    <b id="horizontalDisplacement">{{hD}} </b>
+    <span>cm</span><br><br>
+
+
+    <video id="videoInput" style="display: none;" width="432" height="768"
+            controls autoplay loop [muted]="true" crossorigin="anonymous" >
+            <!-- <source src="{{videoSource}}" type="video/mp4"> -->
+    </video>
+
+    <canvas id="canvasOutput" width="432" height="768"></canvas>
+
+    <br>
+
+  </div>
+
+  <!-- <div class="tab1" *ngIf="tab == 1">
+    grafico
+  </div>
+
+  <div class="tab2" *ngIf="tab == 2">
+    tabela
+  </div> -->
+
+</ion-content>
+
+<!-- <ion-tab-bar slot="bottom">
+  <ion-tab-button (click)="tabChanged(1)">
+    <ion-icon name="analytics"></ion-icon>
+    <ion-label>Gráfico</ion-label>
+  </ion-tab-button>
+  <ion-tab-button (click)="tabChanged(2)">
+    <ion-icon src="assets/icon/list.svg"></ion-icon>
+    <ion-label>Dados</ion-label>
+  </ion-tab-button>
+</ion-tab-bar> -->

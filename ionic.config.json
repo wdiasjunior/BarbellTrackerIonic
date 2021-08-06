@@ -1,5 +1,7 @@
 {
   "name": "tcc",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
