@@ -92,10 +92,12 @@ export class VideoPage implements OnInit {
 
   playPause() {
     if(this.streaming == false) {
-      this.videoInput.play();
+      // this.videoInput.play();
+      (<HTMLVideoElement>document.getElementById("videoInput")).play();
       document.getElementById('playPause').innerHTML = "Stop";
     } else {
-      this.videoInput.pause();
+      // this.videoInput.pause();
+      (<HTMLVideoElement>document.getElementById("videoInput")).pause();
       document.getElementById('playPause').innerHTML = "Play";
     }
     this.streaming = !this.streaming;
@@ -125,7 +127,7 @@ export class VideoPage implements OnInit {
           }
           this.xDisp = this.lastX - x;
           this.xDisp = (this.xDisp / 10);
-          this.yDisp = this.lastY - y
+          this.yDisp = this.lastY - y;
           // xthis.Distance = this.xDisp * this.mmpp;
           this.yDistance = this.yDisp * this.mmpp;
           // this.distance = Math.sqrt(this.xDisp ** 2 + this.yDisp ** 2) * this.mmpp;
@@ -186,10 +188,15 @@ export class VideoPage implements OnInit {
   }
 
   processVideo() {
-
-    let src = new cv.Mat(this.height, this.width, cv.CV_8UC4);
-    let dst = new cv.Mat(this.height, this.width, cv.CV_8UC1);
-    let cap = new cv.VideoCapture("videoInput"); // this.videoInput
+    const width = 432;
+    const height = 768;
+    const FPS = 30;
+    console.log("test1")
+    let src = new cv.Mat(768, 432, cv.CV_8UC4);
+    console.log("test2")
+    let dst = new cv.Mat(768, 432, cv.CV_8UC1);
+    console.log("test3")
+    let cap = new cv.VideoCapture(<HTMLVideoElement>document.getElementById("videoInput")); // this.videoInput
     (<HTMLButtonElement>document.getElementById("playPause")).disabled = false;
 
     let begin = Date.now();
@@ -263,6 +270,66 @@ export class VideoPage implements OnInit {
     this.radius = cv.minEnclosingCircle(cnts).radius;
     this.barMath(x_cm, y_cm);
 
+
+
+
+
+    // if(this.initialY == 0) {
+    //   this.initialY = y_cm;
+    // }
+    // if((this.initialY + this.oscilation) < y) { // checks for rep. ignores bar whip in between reps
+    //   this.rest = false;
+    //   if(y_cm < this.lastY) { // checks if movement is concentric
+    //     this.isConcentric = true;
+    //     // this.velocity = 0;
+    //     this.yVelocity = 0;
+    //     if (this.radius / this.height > 0.0125) {
+    //       if(this.refRadius == null) {
+    //         this.refRadius = this.radius;
+    //         this.mmpp = this.barRadius / this.refRadius;
+    //       }
+    //       this.xDisp = this.lastX - x_cm;
+    //       this.xDisp = (this.xDisp / 10);
+    //       this.yDisp = this.lastY - y_cm;
+    //       // xthis.Distance = this.xDisp * this.mmpp;
+    //       this.yDistance = this.yDisp * this.mmpp;
+    //       // this.distance = Math.sqrt(this.xDisp ** 2 + this.yDisp ** 2) * this.mmpp;
+    //       if(Math.abs(this.yDistance) > (this.barRadius / 4)) {
+    //         // this.velocity = this.distance * this.FPS / 1000;
+    //         this.yVelocity = this.yDistance * this.FPS / 1000;
+    //         this.velocities.push(this.yVelocity);
+    //       }
+    //     }
+    //   } else {
+    //     this.isConcentric = false;
+    //     this.lastY = y_cm;
+    //     this.lastX = x_cm;
+    //   }
+    // } else {
+    //   this.lastY = 0;
+    //   this.lastX = 0;
+    //   this.rest = true;
+    // }
+    //
+    // let sum = 0;
+    // for(let i = 0; i < this.velocities.length; i++) {
+    //   sum += this.velocities[i];
+    // }
+    // this.avgVelocity = (sum / this.velocities.length) / 10;
+    // this.acceleration = (this.avgVelocity / (this.FPS / 1000)) / 10;
+    //
+    // this.v = this.avgVelocity.toFixed(2);
+    // this.a = this.acceleration.toFixed(2);
+    // // document.getElementById("power").innerHTML = power;
+    // this.hD = -this.xDisp.toFixed(2);
+
+
+
+
+
+
+
+
     let centerPoint = new cv.Point(x_cm, y_cm);
     this.centerPointArray[this.count] = centerPoint;
     this.count++;
@@ -276,7 +343,9 @@ export class VideoPage implements OnInit {
       cv.line(src, this.centerPointArray[k - 1], this.centerPointArray[k], [this.red, this.green, this.blue, 255], 2); // pathColor [0, 255, 0, 255]
     }
 
+    console.log("test4")
     cv.imshow("canvasOutput", src);
+    console.log("test5")
 
     dst.delete();
     src.delete();
