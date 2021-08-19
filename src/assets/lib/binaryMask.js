@@ -172,6 +172,7 @@ function setup() {
         isConcentric = false;
         lastY = y;
         lastX = x;
+        velocities = [];
       }
     } else {
       lastY = 0;
