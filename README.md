@@ -2,4 +2,7 @@
 
 TCC 
 
-Ionic mobile app for https://github.com/wdiasjunior/BarbellTracker
+Ionic mobile app using OpenCV.js 
+
+for web version - https://github.com/wdiasjunior/BarbellTracker
+
